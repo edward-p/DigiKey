@@ -58,15 +58,21 @@ void blink3times() {
   }
 }
 void onClick() {
+  // prevent missing the first character after a delay:
+  DigiKeyboard.sendKeyStroke(0);
   DigiKeyboard.println("password1");
   blink3times();
 
 }
 void onDoubleClick() {
+  // prevent missing the first character after a delay:
+  DigiKeyboard.sendKeyStroke(0);
   DigiKeyboard.println("password2");
   blink3times();
 }
 void onLongPressStart() {
+  // prevent missing the first character after a delay:
+  DigiKeyboard.sendKeyStroke(0);
   DigiKeyboard.println("password3");
   blink3times();
 }
