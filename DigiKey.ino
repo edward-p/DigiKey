@@ -23,6 +23,7 @@
 #include "OneButton.h"
 
 #define BUTTON_PIN 0 //pin to trigger button actions
+#define DEBOUNCE 50 //50 msec.debouncing time.
 #define LED_PIN 1
 
 //to set voltage level to HIGH when button pushed down(just uncomment the below)
@@ -53,8 +54,8 @@ void setup() {
   // link the onLongPressStart function to be called when detected longpress event.
   button.attachLongPressStart(onLongPressStart);
 
-  // set 80 msec. debouncing time. Default is 50 msec.
-  button.setDebounceTicks(80);
+  // set debouncing time. Default is 50 msec.
+  button.setDebounceTicks(DEBOUNCE);
 }
 // the loop routine runs over and over again forever:
 void loop() {
