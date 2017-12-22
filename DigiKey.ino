@@ -22,13 +22,29 @@
 #include "DigiKeyboard.h"
 #include "OneButton.h"
 
+#define BUTTON_PIN 0 //pin to trigger button actions
+#define LED_PIN 1
 
-OneButton button(0, 0); //(pin,mode),mode:0-active with HIGH;1-active with LOW
+//to set voltage level to HIGH when button pushed down(just uncomment the below)
+//#define ACTIVE_HIGH
+
+//set up buttons
+#ifdef ACTIVE_HIGH
+OneButton button(BUTTON_PIN, 0);
+#else
+OneButton button(BUTTON_PIN, 1);
+#endif
+
+//define passwords to be send by button behaviors
+enum {CLICK, DOUBLE_CLICK, LONG_PRESS};
+const String passwords[3] {
+  "password1",
+  "password2",
+  "password3"
+};
 
 void setup() {
-  // initialize the digital pin as an output.
-  pinMode(0, INPUT); //
-  pinMode(1, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
 
   // link the onClick function to be called on a click event.
   button.attachClick(onClick);
@@ -51,28 +67,28 @@ void loop() {
 void blink3times() {
   int i;
   for (i = 0; i < 3; i++) {
-    digitalWrite(1, HIGH);
+    digitalWrite(LED_PIN, HIGH);
     delay(100);
-    digitalWrite(1, LOW);
+    digitalWrite(LED_PIN, LOW);
     delay(100);
   }
 }
 void onClick() {
   // prevent missing the first character after a delay:
   DigiKeyboard.sendKeyStroke(0);
-  DigiKeyboard.println("password1");
+  DigiKeyboard.println(passwords[CLICK]);
   blink3times();
 
 }
 void onDoubleClick() {
   // prevent missing the first character after a delay:
   DigiKeyboard.sendKeyStroke(0);
-  DigiKeyboard.println("password2");
+  DigiKeyboard.println(passwords[DOUBLE_CLICK]);
   blink3times();
 }
 void onLongPressStart() {
   // prevent missing the first character after a delay:
   DigiKeyboard.sendKeyStroke(0);
-  DigiKeyboard.println("password3");
+  DigiKeyboard.println(passwords[LONG_PRESS]);
   blink3times();
 }
