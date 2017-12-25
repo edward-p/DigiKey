@@ -23,7 +23,9 @@
 #include "OneButton.h"
 
 #define BUTTON_PIN 0 //pin to trigger button actions
-#define DEBOUNCE 50 //50 msec.debouncing time.
+#define DEBOUNCE 80 //80 msec.debouncing time.
+#define CLICK_TICK 500 // number of millisec that have to pass by before a click is detected.
+#define PRESS_TICK 800 // number of millisec that have to pass by before a long button press is detected.
 #define LED_PIN 1
 
 //to set voltage level to HIGH when button pushed down(just uncomment the below)
@@ -59,6 +61,8 @@ void setup() {
 
   // set debouncing time. Default is 50 msec.
   button.setDebounceTicks(DEBOUNCE);
+  button.setClickTicks(CLICK_TICK);
+  button.setPressTicks(PRESS_TICK);
 }
 // the loop routine runs over and over again forever:
 void loop() {
