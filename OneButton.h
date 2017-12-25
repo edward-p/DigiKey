@@ -11,6 +11,7 @@
 // 23.03.2014 Enhanced long press functionalities by adding longPressStart and longPressStop callbacks
 // 21.09.2015 A simple way for debounce detection added.
 // 14.05.2017 Debouncing improvements.
+// 26.12.2017 edward-p added TripleClick feature in his Digikey scketch.
 // -----
 
 #ifndef OneButton_h
