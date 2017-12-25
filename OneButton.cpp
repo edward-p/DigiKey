@@ -179,7 +179,7 @@ void OneButton::tick(void)
 			if (_doubleClickFunc) _doubleClickFunc();
 			_state = 0; // restart.
 		} else if ((buttonLevel == _buttonPressed) && ((unsigned long)(now - _stopTime) > _debounceTicks)) {
-			_state = 5; // step to state 4
+			_state = 5; // step to state 5
 			_stopTime = now; // remember stopping time
 		}
 	} else if (_state == 5) { // waiting for menu pin being released finally.
