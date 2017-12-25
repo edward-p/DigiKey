@@ -21,13 +21,13 @@
 // ----- Callback function types -----
 
 extern "C" {
-  typedef void (*callbackFunction)(void);
+    typedef void (*callbackFunction)(void);
 }
 
 
 class OneButton
 {
-  public:
+public:
     // ----- Constructor -----
     OneButton(int pin, int active);
 
@@ -45,6 +45,7 @@ class OneButton
     // attach functions that will be called when button was pressed in the specified way.
     void attachClick(callbackFunction newFunction);
     void attachDoubleClick(callbackFunction newFunction);
+    void attachTripleClick(callbackFunction newFunction);
     void attachPress(callbackFunction newFunction); // DEPRECATED, replaced by longPressStart, longPressStop and duringLongPress
     void attachLongPressStart(callbackFunction newFunction);
     void attachLongPressStop(callbackFunction newFunction);
@@ -56,7 +57,7 @@ class OneButton
     void tick(void);
     bool isLongPressed();
 
-  private:
+private:
     int _pin;        // hardware pin number.
     int _debounceTicks; // number of ticks for debounce times.
     int _clickTicks; // number of ticks that have to pass by before a click is detected
@@ -70,6 +71,7 @@ class OneButton
     // These variables will hold functions acting as event source.
     callbackFunction _clickFunc;
     callbackFunction _doubleClickFunc;
+    callbackFunction _TripleClickFunc;
     callbackFunction _pressFunc;
     callbackFunction _longPressStartFunc;
     callbackFunction _longPressStopFunc;

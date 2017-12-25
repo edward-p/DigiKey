@@ -37,11 +37,12 @@ OneButton button(BUTTON_PIN, 1);
 #endif
 
 //define passwords to be send by button behaviors
-enum {CLICK, DOUBLE_CLICK, LONG_PRESS};
-const String passwords[3] {
+enum {CLICK, DOUBLE_CLICK,TRIPLE_CLICK, LONG_PRESS};
+const String passwords[4] {
   "password1",
   "password2",
-  "password3"
+  "password3",
+  "password4"
 };
 
 void setup() {
@@ -51,6 +52,8 @@ void setup() {
   button.attachClick(onClick);
   // link the onDoubleclick function to be called on a doubleclick event.
   button.attachDoubleClick(onDoubleClick);
+  // link the onTripleclick function to be called on a doubleclick event.
+  button.attachTripleClick(onTripleClick);
   // link the onLongPressStart function to be called when detected longpress event.
   button.attachLongPressStart(onLongPressStart);
 
@@ -87,9 +90,16 @@ void onDoubleClick() {
   DigiKeyboard.println(passwords[DOUBLE_CLICK]);
   blink3times();
 }
+void onTripleClick() {
+  // prevent missing the first character after a delay:
+  DigiKeyboard.sendKeyStroke(0);
+  DigiKeyboard.println(passwords[TRIPLE_CLICK]);
+  blink3times();
+}
 void onLongPressStart() {
   // prevent missing the first character after a delay:
   DigiKeyboard.sendKeyStroke(0);
   DigiKeyboard.println(passwords[LONG_PRESS]);
   blink3times();
 }
+
